@@ -1,27 +1,31 @@
-// @ts-check
-const { graphql } = require("graphql");
-const { withPgClient } = require("../helpers");
-const { createPostGraphileSchema } = require("postgraphile-core");
-const { readdirSync, readFile: rawReadFile } = require("fs");
-const { resolve: resolvePath } = require("path");
-const { printSchema } = require("graphql/utilities");
-const debug = require("debug")("graphile-build:schema");
-const { default: PgOrderByRelatedPlugin } = require("../../dist/index.js");
+import { ExecutionResult, graphql } from "graphql";
+import { createPostGraphileSchema } from "postgraphile-core";
+import { readFile } from "fs/promises";
+import { readdirSync } from "fs";
+import { resolve as resolvePath } from "path";
+import { printSchema } from "graphql/utilities";
+import debug0 from "debug";
+const debug = debug0("graphile-build:schema");
 
-function readFile(filename, encoding) {
-  return new Promise((resolve, reject) => {
-    rawReadFile(filename, encoding, (err, res) => {
-      if (err) reject(err);
-      else resolve(res);
-    });
-  });
-}
+import { withPgClient } from "../helpers.js";
+import { beforeAll, expect, test } from "vitest";
+import PgOrderByRelatedPlugin from "../../src/index.js";
 
-const queriesDir = `${__dirname}/../fixtures/queries`;
+const queriesDir = `${import.meta.dirname}/../fixtures/queries`;
 const queryFileNames = readdirSync(queriesDir);
-let queryResults = [];
+let queryResults: Promise<
+  ExecutionResult<
+    {
+      [key: string]: any;
+    },
+    {
+      [key: string]: any;
+    }
+  >
+>[] = [];
 
-const kitchenSinkData = () => readFile(`${__dirname}/../p-data.sql`, "utf8");
+const kitchenSinkData = () =>
+  readFile(`${import.meta.dirname}/../p-data.sql`, "utf8");
 
 beforeAll(() => {
   // Get a few GraphQL schema instance that we can query.

@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "description": "Order by related columns on PostGraphile connections",
   "main": "dist/index.js",
+  "type": "module",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prebuild": "node -p \"'// GENERATED, run \\`yarn prebuild\\` to regenerate.\\n\\nexport const LIB_VERSION = ' + JSON.stringify(require('./package.json').version) + ';\\nexport const LIB_NAME = ' + JSON.stringify(require('./package.json').name) + ';'\" > src/pkg.ts",
     "format": "prettier --ignore-path ./.eslintignore",
     "format:all": "yarn format '**/*.{json,md,html,js,jsx,ts,tsx}'",
     "format:fix": "yarn format:all --write",
     "format:check": "yarn format:all --list-different",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "prepack": "tsc",
-    "test": "tsc && scripts/test"
+    "prepack": "tsc -p tsconfig.build.json",
+    "test": "scripts/test"
   },
   "repository": {
     "type": "git",
@@ -24,21 +26,19 @@
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.4",
+    "@types/debug": "4.1.13",
     "@typescript-eslint/eslint-plugin": "5.59.0",
     "@typescript-eslint/parser": "5.59.0",
+    "debug": "4.4.3",
     "eslint": "8.28.0",
     "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-jest": "27.1.6",
     "eslint-plugin-prettier": "4.2.1",
     "graphql": "15.8.0",
-    "jest": "29.3.1",
     "pg": "8.8.0",
     "postgraphile-core": "4.12.3",
     "prettier": "2.8.0",
-    "typescript": "^5.7.2"
-  },
-  "jest": {
-    "testRegex": "__tests__/.*\\.test\\.js$"
+    "typescript": "^5.7.2",
+    "vitest": "^5.0.1"
   },
   "files": [
     "dist"

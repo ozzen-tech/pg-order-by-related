@@ -1,5 +1,7 @@
 query {
-  CHILDREN_BY_FOO_ID__MAX_NAME_ASC: allFoos(orderBy: CHILDREN_BY_FOO_ID__MAX_NAME_ASC) {
+  CHILDREN_BY_FOO_ID__MAX_NAME_ASC: allFoos(
+    orderBy: CHILDREN_BY_FOO_ID__MAX_NAME_ASC
+  ) {
     nodes {
       id
       childrenByFooId {
@@ -8,8 +10,10 @@ query {
         }
       }
     }
-  },
-  CHILDREN_BY_FOO_ID__MAX_NAME_DESC: allFoos(orderBy: CHILDREN_BY_FOO_ID__MAX_NAME_DESC) {
+  }
+  CHILDREN_BY_FOO_ID__MAX_NAME_DESC: allFoos(
+    orderBy: CHILDREN_BY_FOO_ID__MAX_NAME_DESC
+  ) {
     nodes {
       id
       childrenByFooId {
@@ -18,8 +22,10 @@ query {
         }
       }
     }
-  },
-  CHILDREN_BY_FOO_ID__MIN_ID_ASC: allFoos(orderBy: CHILDREN_BY_FOO_ID__MIN_ID_ASC) {
+  }
+  CHILDREN_BY_FOO_ID__MIN_ID_ASC: allFoos(
+    orderBy: CHILDREN_BY_FOO_ID__MIN_ID_ASC
+  ) {
     nodes {
       id
       childrenByFooId {
@@ -28,8 +34,10 @@ query {
         }
       }
     }
-  },
-  CHILDREN_BY_FOO_ID__MIN_ID_DESC: allFoos(orderBy: CHILDREN_BY_FOO_ID__MIN_ID_DESC) {
+  }
+  CHILDREN_BY_FOO_ID__MIN_ID_DESC: allFoos(
+    orderBy: CHILDREN_BY_FOO_ID__MIN_ID_DESC
+  ) {
     nodes {
       id
       childrenByFooId {
@@ -38,5 +46,5 @@ query {
         }
       }
     }
-  },
+  }
 }
